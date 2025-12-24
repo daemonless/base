@@ -1,0 +1,29 @@
+#!/bin/sh
+# s6-log-helper <service-name>
+
+SERVICE_NAME="$1"
+
+# Load container environment
+[ -f /run/s6/container-environment/all_envs ] && . /run/s6/container-environment/all_envs
+
+DEST_ROOT="${S6_LOG_DEST:-/config/logs/daemonless}"
+LOG_DIR="${DEST_ROOT}/${SERVICE_NAME}"
+
+# Ensure the root log dir exists and is writable
+mkdir -p "${DEST_ROOT}"
+chown bsd:bsd "${DEST_ROOT}"
+
+# Ensure the service log dir exists and is owned by bsd
+mkdir -p "${LOG_DIR}"
+chown -R bsd:bsd "${LOG_DIR}"
+
+MAX_SIZE="${S6_LOG_MAX_SIZE:-1048576}"
+MAX_FILES="${S6_LOG_MAX_FILES:-10}"
+STDOUT_MIRROR="${S6_LOG_STDOUT:-1}"
+
+# Drop privileges and run s6-log
+if [ "${STDOUT_MIRROR}" = "1" ]; then
+    exec s6-setuidgid bsd s6-log T n${MAX_FILES} s${MAX_SIZE} "${LOG_DIR}" 1
+else
+    exec s6-setuidgid bsd s6-log T n${MAX_FILES} s${MAX_SIZE} "${LOG_DIR}"
+fi

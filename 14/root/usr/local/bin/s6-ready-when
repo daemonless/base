@@ -1,0 +1,21 @@
+#!/bin/sh
+# s6-ready-when <command>
+# Runs a command in the background until it succeeds, then signals s6 readiness.
+
+if [ -z "$1" ]; then
+    echo "Usage: s6-ready-when <command>"
+    exit 1
+fi
+
+CHECK_CMD="$*"
+
+(
+    # Wait for the command to succeed (e.g., fetch or a port check)
+    while ! eval "$CHECK_CMD" >/dev/null 2>&1; do
+        sleep 1
+    done
+    
+    # Signal s6 readiness via FD 3
+    # We use printf because s6-notifyonready is missing in PkgBase
+    printf "\n" >&3
+) &

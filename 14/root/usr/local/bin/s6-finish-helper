@@ -1,0 +1,34 @@
+#!/bin/sh
+# s6-finish-helper <exit-code> <signal>
+
+EXIT_CODE="$1"
+SIGNAL="$2"
+SERVICE_NAME="${PWD##*/}"
+
+# Load container environment
+[ -f /run/s6/container-environment/all_envs ] && . /run/s6/container-environment/all_envs
+
+DEST_ROOT="${S6_LOG_DEST:-/config/logs/daemonless}"
+LOG_FILE="${DEST_ROOT}/${SERVICE_NAME}/current"
+
+# Prepare message
+if [ "$EXIT_CODE" -eq 0 ]; then
+    MSG="[s6] Service '${SERVICE_NAME}' stopped normally (Exit: 0)"
+else
+    MSG="[s6] Service '${SERVICE_NAME}' crashed (Exit: ${EXIT_CODE}, Signal: ${SIGNAL})"
+fi
+
+# 1. Log to stderr (visible in podman logs)
+echo "${MSG}" >&2
+
+# 2. Log to persistent file (if directory exists)
+if [ -d "${DEST_ROOT}/${SERVICE_NAME}" ]; then
+    TS=$(date +"%Y-%m-%d %H:%M:%S")
+    echo "${TS} ${MSG}" >> "${LOG_FILE}"
+fi
+
+# 3. Handle crash throttling
+if [ "$EXIT_CODE" -ne 0 ]; then
+    echo "[s6] Waiting 5 seconds before restart..." >&2
+    sleep 5
+fi

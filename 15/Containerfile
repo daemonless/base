@@ -1,0 +1,48 @@
+ARG FREEBSD_RELEASE=15.0
+FROM ghcr.io/freebsd/freebsd-runtime:${FREEBSD_RELEASE}
+
+LABEL org.opencontainers.image.title="base" \
+      org.opencontainers.image.description="FreeBSD base image with s6 supervision" \
+      org.opencontainers.image.source="https://github.com/daemonless/base" \
+      org.opencontainers.image.url="https://github.com/daemonless/base" \
+      org.opencontainers.image.licenses="BSD-2-Clause" \
+      org.opencontainers.image.vendor="daemonless" \
+      org.opencontainers.image.authors="daemonless"
+
+ARG FREEBSD_MAJOR=15
+ARG FREEBSD_ARCH=amd64
+ARG PKG_BRANCH=latest
+
+ENV ASSUME_ALWAYS_YES=yes
+ENV PUID=1000
+ENV PGID=1000
+ENV TZ=UTC
+
+# Copy configuration and init system
+COPY root/ /
+
+# Configure pkg repos and install s6 supervision suite
+# Use mirror_type: NONE to avoid SRV lookups which fail in jails
+# Fix /usr/local/sbin permissions (pkg creates it as 700)
+RUN rm -rf /usr/local/etc/pkg/repos && \
+    pkg update && \
+    pkg install -y s6 s6-rc execline FreeBSD-utilities && \
+    chmod 755 /usr/local/sbin && \
+    pkg clean -ay && \
+    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
+# Create bsd user/group (UID/GID modified at runtime by 10-usermod based on PUID/PGID)
+RUN pw groupadd -n bsd -g 1000 && \
+    pw useradd -n bsd -u 1000 -g bsd -d /config -s /bin/sh -c "Container User"
+
+# Create directory structure for init scripts
+RUN mkdir -p /etc/cont-init.d \
+             /etc/services.d \
+             /custom-cont-init.d \
+             /custom-services.d \
+             /run/s6/services
+
+# Make scripts executable
+RUN chmod +x /init /etc/cont-init.d/* 2>/dev/null || true
+
+ENTRYPOINT ["/init"]

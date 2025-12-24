@@ -1,0 +1,25 @@
+# mtree spec for /usr/local directory structure
+# Fixes permissions that pkg may set incorrectly
+
+/set type=dir uname=root gname=wheel mode=0755
+
+.
+    bin
+    ..
+    etc
+        pkg
+            repos
+            ..
+        ..
+    ..
+    lib
+    ..
+    libdata
+    ..
+    libexec
+    ..
+    sbin
+    ..
+    share
+    ..
+..

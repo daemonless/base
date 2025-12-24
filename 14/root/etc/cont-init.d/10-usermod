@@ -1,0 +1,16 @@
+#!/bin/sh
+# Handles PUID/PGID mapping and /config permissions
+
+echo "[usermod] Setting up user bsd with PUID=${PUID} PGID=${PGID}"
+
+# Update group
+pw groupmod bsd -g "${PGID}"
+
+# Update user
+pw usermod bsd -u "${PUID}" -g "${PGID}"
+
+echo "[usermod] User bsd configured (uid=$(id -u bsd), gid=$(id -g bsd))"
+
+# Ensure /config and /config/logs are writable
+mkdir -p /config/logs/daemonless
+chown -R bsd:bsd /config

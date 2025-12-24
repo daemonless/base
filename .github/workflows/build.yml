@@ -1,0 +1,74 @@
+name: Build FreeBSD Base Image
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['*.md', 'LICENSE', '.gitignore']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/base
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # FreeBSD 15 with latest packages
+          - freebsd_version: "15"
+            pkg_branch: latest
+            push_latest: "--push-latest"
+
+          # FreeBSD 15 with quarterly packages
+          - freebsd_version: "15"
+            pkg_branch: quarterly
+            push_latest: ""
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build in FreeBSD VM (${{ matrix.freebsd_version }}-${{ matrix.pkg_branch }})
+        uses: vmactions/freebsd-vm@v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+        with:
+          release: "15.0"
+          usesh: true
+          copyback: false
+          envs: "GITHUB_TOKEN GITHUB_ACTOR"
+          prepare: |
+            pkg install -y podman
+            rm -rf /var/db/containers /var/lib/containers 2>/dev/null || true
+            kldload pf
+            sysctl net.inet.ip.forwarding=1
+          run: |
+            set -e
+            # Download shared build script (pinned to version)
+            mkdir -p scripts
+            fetch -qo scripts/build-base.sh \
+              "https://raw.githubusercontent.com/daemonless/daemonless/build-base-v1.0.0/scripts/build-base.sh"
+            chmod +x scripts/build-base.sh
+
+            PUSH_FLAG=""
+            if [ "${{ github.event_name }}" != "pull_request" ]; then
+              PUSH_FLAG="--login --push"
+            fi
+
+            ./scripts/build-base.sh \
+              --registry ${{ env.REGISTRY }} \
+              --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} \
+              --freebsd-version ${{ matrix.freebsd_version }} \
+              --pkg-branch ${{ matrix.pkg_branch }} \
+              ${{ matrix.push_latest }} \
+              $PUSH_FLAG
