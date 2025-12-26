@@ -76,4 +76,4 @@ fi
 
 # If no CMD and no services, just keep container alive
 echo "[init] No services or command, sleeping..."
-exec sleep infinity
+while true; do sleep 86400; done
