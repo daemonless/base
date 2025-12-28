@@ -6,6 +6,9 @@ set -e
 
 echo "[init] Starting container initialization..."
 
+# Clean stale s6-log locks from previous unclean shutdown
+find /config/logs -name "lock" -delete 2>/dev/null || true
+
 # Save environment for services
 mkdir -p /run/s6/container-environment
 export -p > /run/s6/container-environment/all_envs
