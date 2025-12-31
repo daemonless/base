@@ -46,6 +46,6 @@ RUN mkdir -p /etc/cont-init.d \
     /run/s6/services
 
 # Make scripts executable
-RUN chmod +x /init /etc/cont-init.d/* 2>/dev/null || true
+RUN chmod +x /init /healthz /etc/cont-init.d/* 2>/dev/null || true
 
 ENTRYPOINT ["/init"]

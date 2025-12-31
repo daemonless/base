@@ -1,0 +1,13 @@
+#!/bin/sh
+# Generic health check - uses HEALTHCHECK_URL env var
+# Override by placing custom /healthz in image's root/
+
+URL="${HEALTHCHECK_URL:-}"
+TIMEOUT="${HEALTHCHECK_TIMEOUT:-5}"
+
+if [ -z "$URL" ]; then
+    echo "HEALTHCHECK_URL not set" >&2
+    exit 1
+fi
+
+exec fetch -qo /dev/null -T "$TIMEOUT" "$URL"
