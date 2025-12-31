@@ -4,7 +4,7 @@ FROM ghcr.io/freebsd/freebsd-runtime:${FREEBSD_RELEASE}
 ARG FREEBSD_MAJOR=15
 ARG FREEBSD_ARCH=amd64
 ARG PKG_BRANCH=latest
-ARG PACKAGES="s6 s6-rc execline FreeBSD-utilities"
+ARG PACKAGES="s6 s6-rc execline FreeBSD-utilities jq"
 
 LABEL org.opencontainers.image.title="base" \
     org.opencontainers.image.description="FreeBSD base image with s6 supervision" \
