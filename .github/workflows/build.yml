@@ -11,6 +11,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository_owner }}/base
+  CIT_VERSION: "0.2.2"
 
 jobs:
   build:
@@ -60,15 +61,58 @@ jobs:
               "https://raw.githubusercontent.com/daemonless/daemonless/build-base-v1.0.0/scripts/build-base.sh"
             chmod +x scripts/build-base.sh
 
-            PUSH_FLAG=""
-            if [ "${{ github.event_name }}" != "pull_request" ]; then
-              PUSH_FLAG="--login --push"
-            fi
-
+            # Build (no push yet)
             ./scripts/build-base.sh \
               --registry ${{ env.REGISTRY }} \
               --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} \
               --freebsd-version ${{ matrix.freebsd_version }} \
               --pkg-branch ${{ matrix.pkg_branch }} \
-              ${{ matrix.push_latest }} \
-              $PUSH_FLAG
+              ${{ matrix.push_latest }}
+
+            # Test with cit (shell mode for base images)
+            echo "=== Running cit tests ==="
+            fetch -qo - https://github.com/daemonless/cit/releases/download/v${{ env.CIT_VERSION }}/cit-${{ env.CIT_VERSION }}.tar.gz | tar xz
+            ./cit-${{ env.CIT_VERSION }}/cit --setup
+
+            mkdir -p cit-results
+            ./cit-${{ env.CIT_VERSION }}/cit ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:build \
+              --mode shell \
+              --json cit-results/base-${{ matrix.pkg_branch }}.json \
+              --verbose
+
+            # Push only after cit passes (non-PR)
+            if [ "${{ github.event_name }}" != "pull_request" ]; then
+              echo "=== Pushing image ==="
+              ./scripts/build-base.sh \
+                --registry ${{ env.REGISTRY }} \
+                --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} \
+                --freebsd-version ${{ matrix.freebsd_version }} \
+                --pkg-branch ${{ matrix.pkg_branch }} \
+                ${{ matrix.push_latest }} \
+                --login --push
+            fi
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cit-results-${{ matrix.pkg_branch }}
+          path: cit-results/
+          retention-days: 30
+
+      - name: Discord notification
+        if: always() && (matrix.pkg_branch == 'latest' || job.status == 'failure')
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            COLOR=3066993
+            STATUS="✅ Success"
+          else
+            COLOR=15158332
+            STATUS="❌ Failed"
+          fi
+
+          curl -sS -H "Content-Type: application/json" \
+            -d "{\"embeds\":[{\"title\":\"base:${{ matrix.pkg_branch }} $STATUS\",\"url\":\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\",\"color\":$COLOR,\"fields\":[{\"name\":\"Branch\",\"value\":\"${{ github.ref_name }}\",\"inline\":true},{\"name\":\"Trigger\",\"value\":\"${{ github.event_name }}\",\"inline\":true}]}]}" \
+            "$DISCORD_WEBHOOK"
