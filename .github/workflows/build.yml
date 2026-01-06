@@ -49,6 +49,11 @@ jobs:
           copyback: false
           envs: "GITHUB_TOKEN GITHUB_ACTOR"
           prepare: |
+            set -e
+            # Use latest repo for CI tools (quarterly often has sync issues)
+            mkdir -p /etc/pkg
+            echo 'FreeBSD: { url: "pkg+http://pkg.FreeBSD.org/${ABI}/latest" }' > /etc/pkg/FreeBSD.conf
+            pkg update -f
             pkg install -y podman
             rm -rf /var/db/containers /var/lib/containers 2>/dev/null || true
             kldload pf
@@ -113,6 +118,9 @@ jobs:
             STATUS="❌ Failed"
           fi
 
+          SHORT_SHA="${{ github.sha }}"
+          SHORT_SHA="${SHORT_SHA:0:7}"
+
           curl -sS -H "Content-Type: application/json" \
-            -d "{\"embeds\":[{\"title\":\"base:${{ matrix.pkg_branch }} $STATUS\",\"url\":\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\",\"color\":$COLOR,\"fields\":[{\"name\":\"Branch\",\"value\":\"${{ github.ref_name }}\",\"inline\":true},{\"name\":\"Trigger\",\"value\":\"${{ github.event_name }}\",\"inline\":true}]}]}" \
+            -d "{\"embeds\":[{\"title\":\"base:${{ matrix.pkg_branch }} $STATUS\",\"url\":\"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\",\"color\":$COLOR,\"fields\":[{\"name\":\"Commit\",\"value\":\"[$SHORT_SHA](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})\",\"inline\":true},{\"name\":\"Branch\",\"value\":\"${{ github.ref_name }}\",\"inline\":true},{\"name\":\"Registry\",\"value\":\"[ghcr.io](https://ghcr.io/daemonless/base)\",\"inline\":true}]}]}" \
             "$DISCORD_WEBHOOK"
