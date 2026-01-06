@@ -24,8 +24,24 @@ ENV TZ=UTC
 # Copy configuration and init system
 COPY root/ /
 
-# Configure pkg repos and install s6 supervision suite
+# Configure pkg repos dynamically based on PKG_BRANCH (latest or quarterly)
 # Use mirror_type: NONE to avoid SRV lookups which fail in jails
+RUN mkdir -p /etc/pkg && \
+    printf '%s\n' \
+      'FreeBSD-ports: { enabled: no }' \
+      'FreeBSD-ports-kmods: { enabled: no }' \
+      'FreeBSD-base: {' \
+      '  url: "http://pkg.FreeBSD.org/${ABI}/base_release_${VERSION_MINOR}",' \
+      '  mirror_type: "NONE",' \
+      '  enabled: yes' \
+      '}' \
+      'Ports: {' \
+      "  url: \"http://pkg.FreeBSD.org/FreeBSD:${FREEBSD_MAJOR}:${FREEBSD_ARCH}/${PKG_BRANCH}\"," \
+      '  mirror_type: "NONE",' \
+      '  enabled: yes' \
+      '}' > /etc/pkg/FreeBSD.conf
+
+# Install s6 supervision suite
 # Fix /usr/local/sbin permissions (pkg creates it as 700)
 RUN rm -rf /usr/local/etc/pkg/repos && \
     pkg update && \
