@@ -1,54 +1,64 @@
-# base-image
+# Base
 
-The core base image for all native FreeBSD OCI containers in the Daemonless project.
+FreeBSD base image with s6 supervision.
 
-## Overview
+| | |
+|---|---|
+| **Registry** | `ghcr.io/daemonless/base` |
+| **Source** | [https://github.com/freebsd/freebsd-src](https://github.com/freebsd/freebsd-src) |
+| **Website** | [https://www.freebsd.org/](https://www.freebsd.org/) |
 
-This image provides a minimal FreeBSD environment optimized for containers. It includes a custom initialization system based on **s6** to manage process lifecycle and environment configuration.
+## Deployment
 
-## Features
+### Podman Compose
 
-- **s6 Supervision**: Standardized process management and reaping.
-- **PUID/PGID Support**: Map the internal `bsd` user to your host user IDs for seamless volume permissions.
-- **VNET Ready**: Configured to work with Virtual Network stacks.
-- **Multiple OS Support**: Variants available for FreeBSD 14 and 15.
-- **Package Selection**: Supports both `latest` and `quarterly` FreeBSD package branches.
+```yaml
+services:
+  base:
+    image: ghcr.io/daemonless/base:latest
+    container_name: base
+    environment:
+    volumes:
+    ports:
+    restart: unless-stopped
+```
 
-## Environment Variables
+### Podman CLI
+
+```bash
+podman run -d --name base \
+  ghcr.io/daemonless/base:latest
+```
+
+### Ansible
+
+```yaml
+- name: Deploy base
+  containers.podman.podman_container:
+    name: base
+    image: ghcr.io/daemonless/base:latest
+    state: started
+    restart_policy: always
+```
+
+## Configuration
+
+### Environment Variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PUID` | 1000 | User ID for the `bsd` user. |
-| `PGID` | 1000 | Group ID for the `bsd` user. |
-| `TZ` | UTC | Container timezone. |
 
-## Usage (for Image Developers)
+### Volumes
 
-Use this as the base for your own FreeBSD images:
+| Path | Description |
+|------|-------------|
 
-```dockerfile
-FROM ghcr.io/daemonless/base-image:15
+### Ports
 
-# Install your app
-RUN pkg install -y myapp
+| Port | Protocol | Description |
+|------|----------|-------------|
 
-# Add your init scripts
-COPY root/ /
+## Notes
 
-# Enable your service
-RUN ln -sf /etc/services.d/myapp/run /run/s6/services/myapp/run
-```
-
-## Directory Structure
-
-- `/init`: The main entrypoint script.
-- `/etc/cont-init.d/`: Place initialization scripts here (executed once at startup).
-- `/etc/services.d/`: Place service definitions here (supervised by s6).
-- `/custom-cont-init.d/`: Mount a volume here to run your own startup scripts without rebuilding the image.
-
-## Variants
-
-- `ghcr.io/daemonless/base-image:15` (FreeBSD 15.x)
-- `ghcr.io/daemonless/base-image:14` (FreeBSD 14.x)
-- Suffix `-quarterly` for images using the stable quarterly package branch.
-<!-- Trigger build -->
+- **User:** `root` (UID/GID set via PUID/PGID)
+- **Base:** Built on `ghcr.io/daemonless/base` (FreeBSD)
