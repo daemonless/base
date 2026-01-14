@@ -17,9 +17,6 @@ services:
   base:
     image: ghcr.io/daemonless/base:latest
     container_name: base
-    environment:
-    volumes:
-    ports:
     restart: unless-stopped
 ```
 
@@ -42,21 +39,6 @@ podman run -d --name base \
 ```
 
 ## Configuration
-
-### Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-
-### Volumes
-
-| Path | Description |
-|------|-------------|
-
-### Ports
-
-| Port | Protocol | Description |
-|------|----------|-------------|
 
 ## Notes
 
