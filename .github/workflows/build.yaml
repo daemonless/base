@@ -24,14 +24,14 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # FreeBSD 15 with latest packages
-          - freebsd_version: "15"
-            pkg_branch: latest
-            push_latest: "--push-latest"
-
-          # FreeBSD 15 with quarterly packages
+          # FreeBSD 15 with quarterly packages (stable default)
           - freebsd_version: "15"
             pkg_branch: quarterly
+            push_latest: "--push-latest"
+
+          # FreeBSD 15 with latest packages (bleeding edge)
+          - freebsd_version: "15"
+            pkg_branch: latest
             push_latest: ""
 
     steps:
@@ -106,7 +106,7 @@ jobs:
           retention-days: 30
 
       - name: Discord notification
-        if: always() && (matrix.pkg_branch == 'latest' || job.status == 'failure')
+        if: always() && (matrix.pkg_branch == 'quarterly' || job.status == 'failure')
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: |
