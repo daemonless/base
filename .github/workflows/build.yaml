@@ -63,7 +63,7 @@ jobs:
             # Download shared build script (pinned to version)
             mkdir -p scripts
             fetch -qo scripts/build-base.sh \
-              "https://raw.githubusercontent.com/daemonless/daemonless/build-base-v1.0.0/scripts/build-base.sh"
+              "https://raw.githubusercontent.com/daemonless/daemonless/build-base-v1.1.0/scripts/build-base.sh"
             chmod +x scripts/build-base.sh
 
             # Build (no push yet)
