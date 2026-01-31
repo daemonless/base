@@ -3,18 +3,19 @@ FROM ghcr.io/freebsd/freebsd-runtime:${FREEBSD_RELEASE}
 
 ARG FREEBSD_MAJOR=15
 ARG FREEBSD_ARCH=amd64
-ARG PKG_BRANCH=latest
+ARG PKG_BRANCH=quarterly
 ARG PACKAGES="s6 s6-rc execline FreeBSD-utilities jq"
+ARG VERSION=""
 
-LABEL org.opencontainers.image.title="base" \
-    org.opencontainers.image.description="FreeBSD base image with s6 supervision" \
-    org.opencontainers.image.source="https://github.com/daemonless/base" \
-    org.opencontainers.image.url="https://github.com/daemonless/base" \
-    org.opencontainers.image.licenses="BSD-2-Clause" \
+LABEL org.opencontainers.image.title="{{ title }}" \
+    org.opencontainers.image.description="{{ description }}" \
+    org.opencontainers.image.source="{{ repo_url }}" \
+    org.opencontainers.image.url="{{ repo_url }}" \
+    org.opencontainers.image.licenses="{{ license }}" \
     org.opencontainers.image.vendor="daemonless" \
     org.opencontainers.image.authors="daemonless" \
     io.daemonless.type="base" \
-    io.daemonless.category="Base" \
+    io.daemonless.category="{{ category }}" \
     io.daemonless.packages="${PACKAGES}"
 
 ENV ASSUME_ALWAYS_YES=yes
@@ -22,11 +23,8 @@ ENV PUID=1000
 ENV PGID=1000
 ENV TZ=UTC
 
-# Copy configuration and init system
 COPY root/ /
 
-# Configure pkg repos dynamically based on PKG_BRANCH (latest or quarterly)
-# Use mirror_type: NONE to avoid SRV lookups which fail in jails
 RUN mkdir -p /etc/pkg && \
     printf '%s\n' \
       'FreeBSD-ports: { enabled: no }' \
@@ -42,8 +40,6 @@ RUN mkdir -p /etc/pkg && \
       '  enabled: yes' \
       '}' > /etc/pkg/FreeBSD.conf
 
-# Install s6 supervision suite
-# Fix /usr/local/sbin permissions (pkg creates it as 700)
 RUN rm -rf /usr/local/etc/pkg/repos && \
     pkg update && \
     pkg install -y ${PACKAGES} && \
@@ -51,18 +47,15 @@ RUN rm -rf /usr/local/etc/pkg/repos && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
 
-# Create bsd user/group (UID/GID modified at runtime by 10-usermod based on PUID/PGID)
 RUN pw groupadd -n bsd -g 1000 && \
     pw useradd -n bsd -u 1000 -g bsd -d /config -s /bin/sh -c "Container User"
 
-# Create directory structure for init scripts
 RUN mkdir -p /etc/cont-init.d \
     /etc/services.d \
     /custom-cont-init.d \
     /custom-services.d \
     /run/s6/services
 
-# Make scripts executable
 RUN chmod +x /init /healthz /etc/cont-init.d/* 2>/dev/null || true
 
 ENTRYPOINT ["/init"]

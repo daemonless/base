@@ -1,1 +1,11 @@
 type: base
+build:
+  auto_version: true
+  variants:
+    - tag: "15"
+      args:
+        PKG_BRANCH: quarterly
+      aliases: ["latest"]
+    - tag: "15-latest"
+      args:
+        PKG_BRANCH: latest

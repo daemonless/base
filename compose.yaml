@@ -1,15 +1,17 @@
 name: base
 
 x-daemonless:
-  title: "Base"
+  title: "FreeBSD Base"
   icon: ":simple-freebsd:"
   category: "Base"
-  description: "FreeBSD base image with s6 supervision."
+  description: "FreeBSD base image with s6 supervision"
+  license: "BSD-2-Clause"
+  repo_url: "https://github.com/daemonless/base"
   upstream_url: "https://github.com/freebsd/freebsd-src"
   web_url: "https://www.freebsd.org/"
   user: "root"
   upstream_binary: false
-  
+
   docs: {}
 
 services: {}
