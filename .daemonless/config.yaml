@@ -5,7 +5,7 @@ build:
     - tag: "15"
       args:
         PKG_BRANCH: quarterly
-      aliases: ["latest"]
+      aliases: ["latest", "15-quarterly"]
     - tag: "15-latest"
       args:
         PKG_BRANCH: latest
