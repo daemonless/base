@@ -1,6 +1,9 @@
 type: base
 build:
   auto_version: true
+  architectures:
+    - amd64
+    - arm64
   variants:
     - tag: "15"
       args:
