@@ -1,11 +1,11 @@
 {
   "image": "base",
-  "generated": "2026-02-01T22:34:24Z",
+  "generated": "2026-02-02T11:55:16Z",
   "tags": {
     "15-latest": {
       "app_version": "15.0",
       "source": "upstream-binary",
-      "generated": "2026-02-01T22:20:06Z",
+      "generated": "2026-02-02T11:54:29Z",
       "packages": {
         "freebsd": [
           {
@@ -170,7 +170,7 @@
     "15": {
       "app_version": "15.0",
       "source": "upstream-binary",
-      "generated": "2026-02-01T22:19:52Z",
+      "generated": "2026-02-02T11:55:07Z",
       "packages": {
         "freebsd": [
           {
