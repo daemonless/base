@@ -3,7 +3,7 @@ build:
   auto_version: true
   architectures:
     - amd64
-    - arm64
+    - aarch64
   variants:
     - tag: "15"
       args:
