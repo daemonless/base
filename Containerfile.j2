@@ -2,7 +2,6 @@ ARG FREEBSD_RELEASE=15.0
 FROM ghcr.io/freebsd/freebsd-runtime:${FREEBSD_RELEASE}
 
 ARG FREEBSD_MAJOR=15
-ARG FREEBSD_ARCH=amd64
 ARG PKG_BRANCH=quarterly
 ARG PACKAGES="s6 s6-rc execline FreeBSD-utilities jq"
 ARG VERSION=""
@@ -27,16 +26,19 @@ COPY root/ /
 
 RUN mkdir -p /etc/pkg && \
     printf '%s\n' \
-      'FreeBSD-ports: { enabled: no }' \
       'FreeBSD-ports-kmods: { enabled: no }' \
       'FreeBSD-base: {' \
-      '  url: "http://pkg.FreeBSD.org/${ABI}/base_release_${VERSION_MINOR}",' \
-      '  mirror_type: "NONE",' \
+      '  url: "pkg+https://pkg.FreeBSD.org/${ABI}/base_release_${VERSION_MINOR}",' \
+      '  mirror_type: "srv",' \
+      '  signature_type: "fingerprints",' \
+      '  fingerprints: "/usr/share/keys/pkgbase-${VERSION_MAJOR}",' \
       '  enabled: yes' \
       '}' \
-      'Ports: {' \
-      "  url: \"http://pkg.FreeBSD.org/FreeBSD:${FREEBSD_MAJOR}:${FREEBSD_ARCH}/${PKG_BRANCH}\"," \
-      '  mirror_type: "NONE",' \
+      'FreeBSD-Ports: {' \
+      "  url: \"pkg+https://pkg.FreeBSD.org/\${ABI}/${PKG_BRANCH}\"," \
+      '  mirror_type: "srv",' \
+      '  signature_type: "fingerprints",' \
+      '  fingerprints: "/usr/share/keys/pkg",' \
       '  enabled: yes' \
       '}' > /etc/pkg/FreeBSD.conf
 
