@@ -1,12 +1,12 @@
 {
   "image": "base",
-  "generated": "2026-03-08T00:21:58Z",
+  "generated": "2026-03-09T22:08:08Z",
   "tags": {
     "15-latest": {
       "arch": "amd64",
       "app_version": "15.0",
       "source": "upstream",
-      "generated": "2026-03-08T00:21:00Z",
+      "generated": "2026-03-09T22:07:24Z",
       "packages": {
         "freebsd": [
           {
@@ -180,7 +180,7 @@
       "arch": "amd64",
       "app_version": "15.0",
       "source": "upstream",
-      "generated": "2026-03-08T00:21:46Z",
+      "generated": "2026-03-09T22:07:53Z",
       "packages": {
         "freebsd": [
           {
