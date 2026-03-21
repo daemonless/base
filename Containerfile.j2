@@ -1,9 +1,7 @@
-ARG FREEBSD_RELEASE=15.0
-FROM ghcr.io/freebsd/freebsd-runtime:${FREEBSD_RELEASE}
+ARG BASE_VERSION=15-pkg
+FROM ghcr.io/daemonless/base-core:${BASE_VERSION}
 
-ARG FREEBSD_MAJOR=15
-ARG PKG_BRANCH=quarterly
-ARG PACKAGES="s6 s6-rc execline FreeBSD-utilities jq"
+ARG PACKAGES="s6 s6-rc execline"
 ARG VERSION=""
 
 LABEL org.opencontainers.image.title="{{ title }}" \
@@ -17,40 +15,12 @@ LABEL org.opencontainers.image.title="{{ title }}" \
     io.daemonless.category="{{ category }}" \
     io.daemonless.packages="${PACKAGES}"
 
-ENV ASSUME_ALWAYS_YES=yes
-ENV PUID=1000
-ENV PGID=1000
-ENV TZ=UTC
-
 COPY root/ /
 
-RUN mkdir -p /etc/pkg && \
-    printf '%s\n' \
-      'FreeBSD-ports-kmods: { enabled: no }' \
-      'FreeBSD-base: {' \
-      '  url: "pkg+https://pkg.FreeBSD.org/${ABI}/base_release_${VERSION_MINOR}",' \
-      '  mirror_type: "srv",' \
-      '  signature_type: "fingerprints",' \
-      '  fingerprints: "/usr/share/keys/pkgbase-${VERSION_MAJOR}",' \
-      '  enabled: yes' \
-      '}' \
-      'FreeBSD-Ports: {' \
-      "  url: \"pkg+https://pkg.FreeBSD.org/\${ABI}/${PKG_BRANCH}\"," \
-      '  mirror_type: "srv",' \
-      '  signature_type: "fingerprints",' \
-      '  fingerprints: "/usr/share/keys/pkg",' \
-      '  enabled: yes' \
-      '}' > /etc/pkg/FreeBSD.conf
-
-RUN rm -rf /usr/local/etc/pkg/repos && \
-    pkg update && \
+RUN pkg update && \
     pkg install -y ${PACKAGES} && \
-    chmod 755 /usr/local/sbin && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
-
-RUN pw groupadd -n bsd -g 1000 && \
-    pw useradd -n bsd -u 1000 -g bsd -d /config -s /bin/sh -c "Container User"
 
 RUN mkdir -p /etc/cont-init.d \
     /etc/services.d \

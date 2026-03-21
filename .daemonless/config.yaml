@@ -6,8 +6,11 @@ build:
   variants:
     - tag: "15"
       args:
-        PKG_BRANCH: quarterly
+        BASE_VERSION: "15-pkg"
       aliases: ["latest", "15-quarterly"]
     - tag: "15-latest"
       args:
-        PKG_BRANCH: latest
+        BASE_VERSION: "15-pkg-latest"
+
+cit:
+  mode: shell
