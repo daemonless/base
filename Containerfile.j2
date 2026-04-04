@@ -1,7 +1,7 @@
 ARG BASE_VERSION=15-pkg
 FROM ghcr.io/daemonless/base-core:${BASE_VERSION}
 
-ARG PACKAGES="s6 s6-rc execline"
+ARG PACKAGES="s6"
 ARG VERSION=""
 
 LABEL org.opencontainers.image.title="{{ title }}" \
