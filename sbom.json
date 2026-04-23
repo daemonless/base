@@ -1,11 +1,11 @@
 {
-  "generated": "2026-04-23T15:58:51Z",
+  "generated": "2026-04-23T20:09:33Z",
   "image": "base",
   "tags": {
     "15": {
       "app_version": "15.0",
       "arch": "amd64",
-      "generated": "2026-04-23T15:57:36Z",
+      "generated": "2026-04-23T20:08:21Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -179,7 +179,7 @@
     "15-latest": {
       "app_version": "15.0",
       "arch": "amd64",
-      "generated": "2026-04-23T15:56:52Z",
+      "generated": "2026-04-23T20:08:02Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
