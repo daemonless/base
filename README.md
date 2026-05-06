@@ -39,7 +39,6 @@ services:
     restart: unless-stopped
 ```
 
-
 ### Podman CLI
 
 ```bash
@@ -57,8 +56,6 @@ podman run -d --name base \
     state: started
     restart_policy: always
 ```
-
-## Parameters
 
 **Architectures:** amd64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)

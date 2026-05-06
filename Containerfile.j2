@@ -1,4 +1,44 @@
 ARG BASE_VERSION=15-pkg
+
+# Builder: compile s6 from ports with FreeBSD 14 compat symver patch.
+# The FreeBSD 15 pkg for s6 links setgroups() against libsys syscall 596
+# (freebsd15_setgroups), which does not exist on FreeBSD 14. Injecting
+# .symver via CFLAGS forces setgroups@FBSD_1.0 (syscall 80) in every
+# compilation unit, making the resulting binaries work on both FreeBSD 14+15.
+FROM ghcr.io/daemonless/base-core:${BASE_VERSION} AS s6-builder
+
+RUN pkg update && pkg install -y \
+    FreeBSD-clang FreeBSD-clibs-dev FreeBSD-toolchain FreeBSD-bmake gmake \
+    && pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+
+COPY patches/fbsd14_compat.h /tmp/fbsd14_compat.h
+
+# Fetch only the ports we need (skalibs -> execline -> s6) plus build infra
+RUN fetch -qo /tmp/ports.tar.zst \
+        "https://download.freebsd.org/ports/ports/ports.tar.zst" && \
+    mkdir -p /usr/ports && \
+    tar -xf /tmp/ports.tar.zst -C /usr/ports --strip-components=1 \
+        ports/devel/skalibs \
+        ports/lang/execline \
+        ports/sysutils/s6 \
+        ports/Mk ports/Templates ports/Keywords && \
+    rm /tmp/ports.tar.zst
+
+# Build skalibs -> execline -> s6 from ports in dependency order.
+# CFLAGS in make.conf propagates to all ports. USE_PACKAGE_DEPENDS_ONLY
+# satisfies external build deps (gmake etc.) from pkg without building them.
+# pkg create produces packages that pkg add installs in the final stage.
+RUN echo 'CFLAGS+=-include /tmp/fbsd14_compat.h' >> /etc/make.conf && \
+    mkdir -p /tmp/packages && \
+    make -C /usr/ports/devel/skalibs BATCH=yes USE_PACKAGE_DEPENDS_ONLY=yes install clean && \
+    pkg create -o /tmp/packages skalibs && \
+    make -C /usr/ports/lang/execline BATCH=yes USE_PACKAGE_DEPENDS_ONLY=yes install clean && \
+    pkg create -o /tmp/packages execline && \
+    make -C /usr/ports/sysutils/s6   BATCH=yes USE_PACKAGE_DEPENDS_ONLY=yes install clean && \
+    pkg create -o /tmp/packages s6 && \
+    rm -rf /usr/ports
+
+# Production image
 FROM ghcr.io/daemonless/base-core:${BASE_VERSION}
 
 ARG PACKAGES="s6"
@@ -17,10 +57,12 @@ LABEL org.opencontainers.image.title="{{ title }}" \
 
 COPY root/ /
 
-RUN pkg update && \
-    pkg install -y ${PACKAGES} && \
-    pkg clean -ay && \
-    rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+# Install s6 and deps from packages built in builder (patched for FreeBSD 14 compat)
+COPY --from=s6-builder /tmp/packages/ /tmp/packages/
+RUN pkg add /tmp/packages/skalibs-*.pkg && \
+    pkg add /tmp/packages/execline-*.pkg && \
+    pkg add /tmp/packages/s6-*.pkg && \
+    rm -rf /tmp/packages
 
 RUN mkdir -p /etc/cont-init.d \
     /etc/services.d \
