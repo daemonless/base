@@ -1,11 +1,11 @@
 {
-  "generated": "2026-05-13T23:27:49Z",
+  "generated": "2026-05-15T23:29:30Z",
   "image": "base",
   "tags": {
     "15": {
       "app_version": "15.0",
       "arch": "amd64",
-      "generated": "2026-05-13T23:26:40Z",
+      "generated": "2026-05-15T23:28:12Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -127,7 +127,7 @@
           },
           {
             "name": "ca_root_nss",
-            "version": "3.117_2"
+            "version": "3.123.1"
           },
           {
             "name": "execline",
@@ -179,7 +179,7 @@
     "15-latest": {
       "app_version": "15.0",
       "arch": "amd64",
-      "generated": "2026-05-13T23:25:32Z",
+      "generated": "2026-05-15T23:28:21Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -301,7 +301,7 @@
           },
           {
             "name": "ca_root_nss",
-            "version": "3.117_2"
+            "version": "3.123.1"
           },
           {
             "name": "execline",
@@ -348,6 +348,188 @@
         "ruby": 0,
         "rust": 0,
         "total": 36
+      }
+    },
+    "15.1-beta3": {
+      "app_version": "15.1.b3.20260515094026",
+      "arch": "amd64",
+      "generated": "2026-05-15T23:27:04Z",
+      "packages": {
+        "dotnet": [],
+        "freebsd": [
+          {
+            "name": "FreeBSD-audit-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-blocklist",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-bzip2-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-certctl",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-clibs",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-ctf-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-fetch",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-kerberos-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-libarchive",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-libbsdstat",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-libcasper",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-libexecinfo",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-libldns",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-libmagic",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-libucl",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-mtree",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-ncurses-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-openssl",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-openssl-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-pam-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-pkg-bootstrap",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-rc",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-runtime",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-tcpd",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-ufs-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-utilities",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-xz-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-zfs-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-zlib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-zoneinfo",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "FreeBSD-zstd-lib",
+            "version": "15.1.b3.20260515094026"
+          },
+          {
+            "name": "ca_root_nss",
+            "version": "3.123.1"
+          },
+          {
+            "name": "execline",
+            "version": "2.9.8.1"
+          },
+          {
+            "name": "jq",
+            "version": "1.8.1"
+          },
+          {
+            "name": "oniguruma",
+            "version": "6.9.10"
+          },
+          {
+            "name": "pkg",
+            "version": "2.6.2_1"
+          },
+          {
+            "name": "s6",
+            "version": "2.14.0.1"
+          },
+          {
+            "name": "skalibs",
+            "version": "2.14.5.1"
+          }
+        ],
+        "go": [],
+        "java": [],
+        "node": [],
+        "php": [],
+        "python": [],
+        "ruby": [],
+        "rust": []
+      },
+      "source": "upstream",
+      "summary": {
+        "dotnet": 0,
+        "freebsd": 38,
+        "go": 0,
+        "java": 0,
+        "node": 0,
+        "php": 0,
+        "python": 0,
+        "ruby": 0,
+        "rust": 0,
+        "total": 38
       }
     }
   }
