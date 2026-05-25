@@ -47,7 +47,8 @@ if [ -d /etc/services.d ]; then
             service_run_dir="/run/s6/services/$service_name"
             
             # Link the main service
-            ln -sf "$service" "$service_run_dir"
+            # Use -n to prevent following an existing symlink-to-directory on restart
+            ln -sfn "$service" "$service_run_dir"
             
             # Auto-generate log service if it doesn't exist and logging is enabled
             if [ "${S6_LOG_ENABLE:-1}" = "1" ] && [ ! -d "$service/log" ]; then
