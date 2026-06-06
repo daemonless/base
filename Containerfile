@@ -6,21 +6,26 @@
 
 ARG BASE_VERSION=15-pkg
 
-# Builder: compile s6 from ports with FreeBSD 14 compat symver patch.
+# Builder: on amd64, compile s6 from ports with a FreeBSD-14 compat symver patch.
 # The FreeBSD 15 pkg for s6 links setgroups() against libsys syscall 596
-# (freebsd15_setgroups), which does not exist on FreeBSD 14. Injecting
-# .symver via CFLAGS forces setgroups@FBSD_1.0 (syscall 80) in every
-# compilation unit, making the resulting binaries work on both FreeBSD 14+15.
+# (freebsd15_setgroups), which does not exist on FreeBSD 14. Injecting .symver
+# via CFLAGS forces setgroups@FBSD_1.0 (syscall 80) so the binaries work on
+# FreeBSD 14+15. On aarch64 we skip the compile entirely and use the stock pkg
+# in the final stage (see below).
 FROM ghcr.io/daemonless/base-core:${BASE_VERSION} AS s6-builder
 
-RUN pkg update && pkg install -y \
-    FreeBSD-clang FreeBSD-clibs-dev FreeBSD-toolchain FreeBSD-bmake gmake \
-    && pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
+ARG FREEBSD_ARCH=amd64
 
 COPY patches/fbsd14_compat.h /tmp/fbsd14_compat.h
 
-# Fetch only the ports we need (skalibs -> execline -> s6) plus build infra
-RUN fetch -qo /tmp/ports.tar.zst \
+# amd64 only: build skalibs -> execline -> s6 from ports (dependency order) with
+# the compat patch, then `pkg create` them for the final stage. Any other arch
+# leaves /tmp/packages empty and the final stage installs the stock s6 pkg.
+RUN if [ "${FREEBSD_ARCH}" != "amd64" ]; then mkdir -p /tmp/packages; exit 0; fi; \
+    pkg update && pkg install -y \
+        FreeBSD-clang FreeBSD-clibs-dev FreeBSD-toolchain FreeBSD-bmake gmake && \
+    pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/* && \
+    fetch -qo /tmp/ports.tar.zst \
         "https://download.freebsd.org/ports/ports/ports.tar.zst" && \
     mkdir -p /usr/ports && \
     tar -xf /tmp/ports.tar.zst -C /usr/ports --strip-components=1 \
@@ -28,13 +33,8 @@ RUN fetch -qo /tmp/ports.tar.zst \
         ports/lang/execline \
         ports/sysutils/s6 \
         ports/Mk ports/Templates ports/Keywords && \
-    rm /tmp/ports.tar.zst
-
-# Build skalibs -> execline -> s6 from ports in dependency order.
-# CFLAGS in make.conf propagates to all ports. USE_PACKAGE_DEPENDS_ONLY
-# satisfies external build deps (gmake etc.) from pkg without building them.
-# pkg create produces packages that pkg add installs in the final stage.
-RUN echo 'CFLAGS+=-include /tmp/fbsd14_compat.h' >> /etc/make.conf && \
+    rm /tmp/ports.tar.zst && \
+    echo 'CFLAGS+=-include /tmp/fbsd14_compat.h' >> /etc/make.conf && \
     mkdir -p /tmp/packages && \
     make -C /usr/ports/devel/skalibs BATCH=yes USE_PACKAGE_DEPENDS_ONLY=yes install clean && \
     pkg create -o /tmp/packages skalibs && \
@@ -49,6 +49,7 @@ FROM ghcr.io/daemonless/base-core:${BASE_VERSION}
 
 ARG PACKAGES="s6"
 ARG VERSION=""
+ARG FREEBSD_ARCH=amd64
 
 LABEL org.opencontainers.image.title="FreeBSD Base" \
     org.opencontainers.image.description="FreeBSD base image with s6 supervision" \
@@ -63,11 +64,17 @@ LABEL org.opencontainers.image.title="FreeBSD Base" \
 
 COPY root/ /
 
-# Install s6 and deps from packages built in builder (patched for FreeBSD 14 compat)
+# amd64: install the compat-patched s6 built in the builder stage.
+# aarch64 (and any non-amd64): install the stock s6 pkg (no recompile).
 COPY --from=s6-builder /tmp/packages/ /tmp/packages/
-RUN pkg add /tmp/packages/skalibs-*.pkg && \
-    pkg add /tmp/packages/execline-*.pkg && \
-    pkg add /tmp/packages/s6-*.pkg && \
+RUN if [ "${FREEBSD_ARCH}" = "amd64" ]; then \
+        pkg add /tmp/packages/skalibs-*.pkg && \
+        pkg add /tmp/packages/execline-*.pkg && \
+        pkg add /tmp/packages/s6-*.pkg; \
+    else \
+        pkg update && pkg install -y s6 && \
+        pkg clean -ay && rm -rf /var/cache/pkg/* /var/db/pkg/repos/*; \
+    fi && \
     rm -rf /tmp/packages
 
 RUN mkdir -p /etc/cont-init.d \

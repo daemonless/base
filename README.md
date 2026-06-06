@@ -22,7 +22,7 @@ FreeBSD base image with s6 supervision
 | :--- | :--- | :--- |
 | `15` / `15-quarterly` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
 | `15-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
-| `15.1-beta3` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15.1-rc3` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
 
 ## Prerequisites
 
@@ -58,7 +58,7 @@ podman run -d --name base \
     restart_policy: always
 ```
 
-**Architectures:** amd64
+**Architectures:** amd64, aarch64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
 **Base:** FreeBSD 15.0
 
