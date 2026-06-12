@@ -22,7 +22,8 @@ FreeBSD base image with s6 supervision
 | :--- | :--- | :--- |
 | `15` / `15-quarterly` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
 | `15-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
-| `15.1-rc3` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15.1` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
 
 ## Prerequisites
 
@@ -35,7 +36,7 @@ Before deploying, ensure your host environment is ready. See the [Quick Start Gu
 ```yaml
 services:
   base:
-    image: ghcr.io/daemonless/base:latest
+    image: "ghcr.io/daemonless/base:latest"
     container_name: base
     restart: unless-stopped
 ```
@@ -53,7 +54,7 @@ podman run -d --name base \
 - name: Deploy base
   containers.podman.podman_container:
     name: base
-    image: ghcr.io/daemonless/base:latest
+    image: "ghcr.io/daemonless/base:latest"
     state: started
     restart_policy: always
 ```

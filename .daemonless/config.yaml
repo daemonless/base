@@ -11,9 +11,12 @@ build:
     - tag: "15-latest"
       args:
         BASE_VERSION: "15-pkg-latest"
-    - tag: "15.1-rc3"
+    - tag: "15.1"
       args:
-        BASE_VERSION: "15.1-rc3-pkg"
+        BASE_VERSION: "15.1-pkg"
+    - tag: "15.1-latest"
+      args:
+        BASE_VERSION: "15.1-pkg-latest"
 
 cit:
   mode: shell
