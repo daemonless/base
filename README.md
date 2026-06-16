@@ -20,9 +20,9 @@ FreeBSD base image with s6 supervision
 
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `15` / `15-quarterly` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
 | `15-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
-| `15.1` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15-quarterly` / `15.1` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
 | `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
 
 ## Prerequisites

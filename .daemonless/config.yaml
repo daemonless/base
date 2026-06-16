@@ -6,13 +6,13 @@ build:
     - tag: "15"
       args:
         BASE_VERSION: "15-pkg"
-      aliases: ["latest", "15-quarterly"]
     - tag: "15-latest"
       args:
         BASE_VERSION: "15-pkg-latest"
     - tag: "15.1"
       args:
         BASE_VERSION: "15.1-pkg"
+      aliases: ["latest", "15-quarterly"]
     - tag: "15.1-latest"
       args:
         BASE_VERSION: "15.1-pkg-latest"
