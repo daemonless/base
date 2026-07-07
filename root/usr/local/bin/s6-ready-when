@@ -1,6 +1,12 @@
 #!/bin/sh
 # s6-ready-when <command>
-# Runs a command in the background until it succeeds, then signals s6 readiness.
+# Polls a command in the background until it succeeds, then signals s6
+# readiness on FD 3 (requires a notification-fd file containing '3').
+#
+# The poll loop is bounded and dies with its service. An unbounded orphan
+# here fork-bombed the host once: a crash-looping service leaked one
+# immortal 1s-retry loop per restart (4467 restarts overnight -> ~50k
+# processes). Override the bound with S6_READY_TIMEOUT (seconds).
 
 if [ -z "$1" ]; then
     echo "Usage: s6-ready-when <command>"
@@ -9,12 +15,23 @@ fi
 
 CHECK_CMD="$*"
 
+# Our parent is the run script's shell, which exec()s into the service --
+# same PID. When that PID is gone the service died and readiness is moot.
+SERVICE_PID=$PPID
+
 (
+    tries="${S6_READY_TIMEOUT:-300}"
     # Wait for the command to succeed (e.g., fetch or a port check)
     while ! eval "$CHECK_CMD" >/dev/null 2>&1; do
+        kill -0 "$SERVICE_PID" 2>/dev/null || exit 0
+        tries=$((tries - 1))
+        [ "$tries" -gt 0 ] || exit 0
         sleep 1
     done
-    
+
+    # Don't signal readiness for a service that died after the check passed
+    kill -0 "$SERVICE_PID" 2>/dev/null || exit 0
+
     # Signal s6 readiness via FD 3
     # We use printf because s6-notifyonready is missing in PkgBase
     printf "\n" >&3

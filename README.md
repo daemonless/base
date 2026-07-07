@@ -17,7 +17,6 @@ FreeBSD base image with s6 supervision
 | **Website** | [https://www.freebsd.org/](https://www.freebsd.org/) |
 
 ## Version Tags
-
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
 | `15` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
@@ -26,7 +25,6 @@ FreeBSD base image with s6 supervision
 | `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
 
 ## Prerequisites
-
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
 
 ## Deployment
@@ -61,7 +59,7 @@ podman run -d --name base \
 
 **Architectures:** amd64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
-**Base:** FreeBSD 15.0
+**Base:** FreeBSD 15
 
 ---
 
