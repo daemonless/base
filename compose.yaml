@@ -11,6 +11,7 @@ x-daemonless:
   web_url: "https://www.freebsd.org/"
   user: "root"
   upstream_binary: false
+  appjail: false
 
   docs: {}
 
