@@ -3,19 +3,14 @@ build:
   architectures:
     - amd64
   variants:
-    - tag: "15"
-      args:
-        BASE_VERSION: "15-pkg"
-    - tag: "15-latest"
-      args:
-        BASE_VERSION: "15-pkg-latest"
     - tag: "15.1"
       args:
         BASE_VERSION: "15.1-pkg"
-      aliases: ["latest", "15-quarterly"]
+      aliases: ["latest", "15-quarterly", "15"]
     - tag: "15.1-latest"
       args:
         BASE_VERSION: "15.1-pkg-latest"
+      aliases: ["15-latest"]
 
 cit:
   mode: shell
