@@ -19,10 +19,8 @@ FreeBSD base image with s6 supervision
 ## Version Tags
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `15` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
-| `15-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
-| `15-quarterly` / `15.1` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
-| `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+| `15` / `15-quarterly` / `15.1` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15-latest` / `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
 
 ## Prerequisites
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
@@ -57,7 +55,7 @@ podman run -d --name base \
     restart_policy: always
 ```
 
-**Architectures:** amd64
+**Architectures:** amd64, aarch64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
 **Base:** FreeBSD 15
 
