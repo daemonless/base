@@ -20,7 +20,7 @@ FreeBSD base image with s6 supervision
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
 | `15` / `15-quarterly` / `15.1` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
-| `15-latest` / `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Newest FreeBSD packages. |
+| `15-latest` / `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
 
 ## Prerequisites
 Before deploying, ensure your host environment is ready. See the [Quick Start Guide](https://daemonless.io/guides/quick-start) for host setup instructions.
