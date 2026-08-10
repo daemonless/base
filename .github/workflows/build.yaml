@@ -13,5 +13,4 @@ jobs:
     uses: daemonless/dbuild/.github/workflows/daemonless-build.yaml@main
     with:
       image_name: base
-      dbuild_ref: main
     secrets: inherit
