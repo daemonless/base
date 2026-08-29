@@ -34,14 +34,39 @@ services:
   base:
     image: "ghcr.io/daemonless/base:latest"
     container_name: base
-    restart: unless-stopped
+    # always (not unless-stopped) so FreeBSD's podman rc.d auto-starts it at boot
+    restart: always
 ```
+
+Save as `compose.yaml`, then run `podman-compose up -d`.
 
 ### Podman CLI
 
 ```bash
 podman run -d --name base \
   ghcr.io/daemonless/base:latest
+```
+
+Save as `run.sh`, then run `sh run.sh`.
+
+### Bastille
+
+> [!WARNING]
+> Bastille's OCI support is **experimental**. It requires `buildah`, shares the host network stack (`inherit`), and persists image-declared volumes under `--data-path`.
+
+```yaml
+services:
+  base:
+    image: "ghcr.io/daemonless/base:latest"
+    container_name: base
+    network_mode: host  # jail shares host networking
+```
+
+Save as `podman-compose.yml`, then run `bastille up`. Or via CLI:
+
+```bash
+bastille create -O \
+  base ghcr.io/daemonless/base:latest inherit
 ```
 
 ### Ansible
@@ -54,6 +79,8 @@ podman run -d --name base \
     state: started
     restart_policy: always
 ```
+
+Save as `base-deploy.yaml`, then run `ansible-playbook base-deploy.yaml`.
 
 **Architectures:** amd64, aarch64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
