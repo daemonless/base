@@ -27,7 +27,16 @@ if [ -d "${DEST_ROOT}/${SERVICE_NAME}" ]; then
     echo "${TS} ${MSG}" >> "${LOG_FILE}"
 fi
 
-# 3. Handle crash throttling
+# Supervision mode. DAEMONLESS_SUPERVISE=orchestrator: do NOT restart in place;
+# terminate the supervision tree so the container exits and the orchestrator
+# (k8s restartPolicy, podman --restart, etc.) restarts it. Default "self":
+# standalone in-place self-healing (the throttled restart below).
+if [ "${DAEMONLESS_SUPERVISE:-self}" = "orchestrator" ]; then
+    echo "[s6] supervise=orchestrator: '${SERVICE_NAME}' exited (${EXIT_CODE}); terminating supervision tree" >&2
+    exec s6-svscanctl -t /run/s6/services
+fi
+
+# 3. Handle crash throttling (standalone / self-healing)
 if [ "$EXIT_CODE" -ne 0 ]; then
     echo "[s6] Waiting 5 seconds before restart..." >&2
     sleep 5
