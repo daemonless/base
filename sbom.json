@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-08T10:05:05Z",
+  "generated": "2026-09-15T13:12:19Z",
   "image": "base",
   "tags": {
     "15.1-amd64": {
       "app_version": "15.1",
       "arch": "amd64",
-      "generated": "2026-09-08T10:03:50Z",
+      "generated": "2026-09-15T13:11:26Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -238,7 +238,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.127"
+            "version": "3.129"
           },
           {
             "licenses": [
@@ -308,7 +308,7 @@
     "15.1-latest-amd64": {
       "app_version": "15.1",
       "arch": "amd64",
-      "generated": "2026-09-08T10:04:31Z",
+      "generated": "2026-09-15T13:11:55Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -541,7 +541,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.127"
+            "version": "3.129"
           },
           {
             "licenses": [

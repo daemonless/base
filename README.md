@@ -7,6 +7,7 @@ Source: dbuild templates
 
 [![Build Status](https://img.shields.io/github/actions/workflow/status/daemonless/base/build.yaml?style=flat-square&label=Build&color=green)](https://github.com/daemonless/base/actions)
 [![Last Commit](https://img.shields.io/github/last-commit/daemonless/base?style=flat-square&label=Last+Commit&color=blue)](https://github.com/daemonless/base/commits)
+[![OCI Pulls](https://img.shields.io/docker/pulls/daemonless/base?style=flat-square&label=OCI+Pulls&color=blue)](https://hub.docker.com/r/daemonless/base)
 
 FreeBSD base image with s6 supervision
 
@@ -52,17 +53,18 @@ Save as `run.sh`, then run `sh run.sh`.
 ### Bastille
 
 > [!WARNING]
-> Bastille's OCI support is **experimental**. It requires `buildah`, shares the host network stack (`inherit`), and persists image-declared volumes under `--data-path`.
+> Bastille's OCI support is **experimental**. It requires `buildah` and shares the host network stack (`inherit`). Mount volumes with `--volume HOST JAIL`; without it, image-declared volumes are stored under `${bastille_volumesdir}/${jail}`.
 
 ```yaml
 services:
   base:
+    name: base
     image: "ghcr.io/daemonless/base:latest"
-    container_name: base
-    network_mode: host  # jail shares host networking
+    network:
+      - mode: host
 ```
 
-Save as `podman-compose.yml`, then run `bastille up`. Or via CLI:
+Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
 
 ```bash
 bastille create -O \
