@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-15T13:12:19Z",
+  "generated": "2026-09-17T07:32:16Z",
   "image": "base",
   "tags": {
     "15.1-amd64": {
       "app_version": "15.1",
       "arch": "amd64",
-      "generated": "2026-09-15T13:11:26Z",
+      "generated": "2026-09-17T07:30:48Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -49,6 +49,13 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-ctf-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD-3-Clause"
+            ],
+            "name": "FreeBSD-dhclient",
             "version": "15.1"
           },
           {
@@ -168,6 +175,13 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-rc",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-resolvconf",
             "version": "15.1"
           },
           {
@@ -294,7 +308,7 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 39,
+        "freebsd": 41,
         "go": 0,
         "java": 0,
         "node": 0,
@@ -302,13 +316,13 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 39
+        "total": 41
       }
     },
     "15.1-latest-amd64": {
       "app_version": "15.1",
       "arch": "amd64",
-      "generated": "2026-09-15T13:11:55Z",
+      "generated": "2026-09-17T07:31:38Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -352,6 +366,13 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-ctf-lib",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD-3-Clause"
+            ],
+            "name": "FreeBSD-dhclient",
             "version": "15.1"
           },
           {
@@ -471,6 +492,13 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-rc",
+            "version": "15.1"
+          },
+          {
+            "licenses": [
+              "BSD2CLAUSE"
+            ],
+            "name": "FreeBSD-resolvconf",
             "version": "15.1"
           },
           {
@@ -597,7 +625,7 @@
       "source": "upstream",
       "summary": {
         "dotnet": 0,
-        "freebsd": 39,
+        "freebsd": 41,
         "go": 0,
         "java": 0,
         "node": 0,
@@ -605,7 +633,7 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 39
+        "total": 41
       }
     }
   }
