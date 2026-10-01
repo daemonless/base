@@ -2,6 +2,7 @@ name: base
 
 x-daemonless:
   title: "FreeBSD Base"
+  class: "base"  # built FROM, not deployed: no Deployment section
   icon: ":simple-freebsd:"
   category: "Base"
   description: "FreeBSD base image with s6 supervision"
