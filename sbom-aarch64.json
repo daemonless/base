@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-08T00:29:48Z",
+  "generated": "2026-10-11T15:29:55Z",
   "image": "base",
   "tags": {
     "15.1-aarch64": {
       "app_version": "15.1",
       "arch": "aarch64",
-      "generated": "2026-10-08T00:28:29Z",
+      "generated": "2026-10-11T15:28:29Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -280,7 +280,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.7.5"
+            "version": "2.8.4"
           },
           {
             "licenses": [
@@ -322,7 +322,7 @@
     "15.1-latest-aarch64": {
       "app_version": "15.1",
       "arch": "aarch64",
-      "generated": "2026-10-08T00:28:33Z",
+      "generated": "2026-10-11T15:28:34Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
