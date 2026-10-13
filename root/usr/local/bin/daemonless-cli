@@ -1,0 +1,64 @@
+#!/bin/sh
+# daemonless-cli: run an app's CLI as the app user (bsd, i.e. PUID/PGID).
+#
+# Images opt in through x-daemonless.cli; dbuild then emits
+#   RUN daemonless-cli --install <name>...
+# Each <name> becomes a symlink to this script in /usr/local/daemonless/bin,
+# which base puts first on PATH. Called by that name as root
+# (podman exec), it drops to bsd so the CLI can't leave root-owned files in
+# /config; as any other user it just runs the real binary. The real binary is
+# never renamed: its full path still runs as root.
+
+self_dir=/usr/local/daemonless/bin
+
+die() {
+    echo "daemonless-cli: $*" >&2
+    exit 1
+}
+
+# PATH without our own dir, so lookups find the real binary, not the link.
+real_path() {
+    _out=
+    _ifs=$IFS
+    IFS=:
+    for _d in $PATH; do
+        [ "$_d" = "$self_dir" ] && continue
+        _out=${_out:+$_out:}$_d
+    done
+    IFS=$_ifs
+    echo "$_out"
+}
+
+install_links() {
+    [ $# -gt 0 ] || die "--install needs at least one CLI name"
+    mkdir -p "$self_dir" || exit 1
+    PATH=$(real_path)
+    for _name in "$@"; do
+        case $_name in
+            */*|daemonless-cli) die "not a CLI name: $_name" ;;
+        esac
+        # Fail the build on a typo, not the user at exec time.
+        command -v "$_name" >/dev/null 2>&1 || die "$_name: not found on PATH"
+        ln -sf ../../bin/daemonless-cli "$self_dir/$_name" || exit 1
+    done
+}
+
+name=${0##*/}
+if [ "$name" = daemonless-cli ]; then
+    case $1 in
+        --install) shift; install_links "$@"; exit $? ;;
+        *) die "usage: daemonless-cli --install <name>..." ;;
+    esac
+fi
+
+PATH=$(real_path)
+export PATH
+real=$(command -v "$name") || { echo "$name: not found" >&2; exit 127; }
+
+if [ "$(id -u)" -eq 0 ]; then
+    # s6-setuidgid sets only uid/gid; HOME would stay /root.
+    HOME=$(getent passwd bsd | cut -d: -f6)
+    export HOME="${HOME:-/config}" USER=bsd LOGNAME=bsd
+    exec s6-setuidgid bsd "$real" "$@"
+fi
+exec "$real" "$@"

@@ -75,7 +75,12 @@ RUN mkdir -p /etc/cont-init.d \
     /etc/services.d \
     /custom-cont-init.d \
     /custom-services.d \
-    /run/s6/services
+    /run/s6/services \
+    /usr/local/daemonless/bin
+
+# App CLIs an image declares (x-daemonless.cli) are wrapped here by
+# daemonless-cli, so podman exec runs them as bsd. Empty otherwise.
+ENV PATH="/usr/local/daemonless/bin:${PATH}"
 
 RUN chmod +x /init /healthz /etc/cont-init.d/* 2>/dev/null || true
 
