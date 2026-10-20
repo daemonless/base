@@ -20,8 +20,8 @@ FreeBSD base image with s6 supervision
 ## Version Tags
 | Tag | Description | Best For |
 | :--- | :--- | :--- |
-| `15` / `15-quarterly` / `15.1` / `latest` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
-| `15-latest` / `15.1-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
+| `15` / `15-quarterly` / `15.1` / `latest` / `pkg` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15-latest` / `15.1-latest` / `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
 
 **Architectures:** amd64, aarch64
 **User:** `root` (UID/GID via PUID/PGID, defaults to 1000:1000)
