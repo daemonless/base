@@ -4,6 +4,10 @@
 
 set -e
 
+# The logo and what this container runs on (DAEMONLESS_BANNER=off hides it).
+# Ships in base-core; an image on an older base-core has none.
+[ -x /daemonless/banner ] && /daemonless/banner || :
+
 echo "[init] Starting container initialization..."
 
 # Clean stale s6-log locks from previous unclean shutdown
