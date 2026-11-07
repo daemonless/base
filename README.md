@@ -22,6 +22,8 @@ FreeBSD base image with s6 supervision
 | :--- | :--- | :--- |
 | `15` / `15-quarterly` / `15.1` / `latest` / `pkg` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
 | `15-latest` / `15.1-latest` / `pkg-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
+| `15.2.beta1` | **FreeBSD Port**. Built from FreeBSD packages. | Production stability. |
+| `15.2.beta1-latest` | **FreeBSD Latest**. Rolling package updates. | Staying current. |
 
 **Architectures:** amd64, aarch64
 **User:** `root` — the service process stays root by design, not dropped to `bsd`
