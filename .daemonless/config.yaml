@@ -12,12 +12,12 @@ build:
       args:
         BASE_VERSION: "15.1-pkg-latest"
       aliases: ["15-latest", "pkg-latest"]
-    - tag: "15.2.beta2"
+    - tag: "15.2.beta3"
       args:
-        BASE_VERSION: "15.2.beta2-pkg"
-    - tag: "15.2.beta2-latest"
+        BASE_VERSION: "15.2.beta3-pkg"
+    - tag: "15.2.beta3-latest"
       args:
-        BASE_VERSION: "15.2.beta2-pkg-latest"
+        BASE_VERSION: "15.2.beta3-pkg-latest"
 
 cit:
   mode: shell
