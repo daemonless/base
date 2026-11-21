@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-14T22:39:46Z",
+  "generated": "2026-11-21T14:54:56Z",
   "image": "base",
   "tags": {
     "15.1-aarch64": {
       "app_version": "15.1",
       "arch": "aarch64",
-      "generated": "2026-11-14T22:34:38Z",
+      "generated": "2026-11-21T14:50:57Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -77,7 +77,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libarchive",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -105,7 +105,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libldns",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -147,14 +147,14 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1p4"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -168,7 +168,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -189,7 +189,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p6"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -224,7 +224,7 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-zfs-lib",
-            "version": "15.1p1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -238,7 +238,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p5"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -280,7 +280,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.8.4"
+            "version": "2.9.2"
           },
           {
             "licenses": [
@@ -322,7 +322,7 @@
     "15.1-latest-aarch64": {
       "app_version": "15.1",
       "arch": "aarch64",
-      "generated": "2026-11-14T22:34:43Z",
+      "generated": "2026-11-21T14:51:01Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -394,7 +394,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libarchive",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -422,7 +422,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libldns",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -464,14 +464,14 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1p4"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -485,7 +485,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -506,7 +506,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p6"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -541,7 +541,7 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-zfs-lib",
-            "version": "15.1p1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -555,7 +555,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p5"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -597,7 +597,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.9.0"
+            "version": "2.9.2"
           },
           {
             "licenses": [
@@ -636,10 +636,10 @@
         "total": 41
       }
     },
-    "15.2.beta2-aarch64": {
-      "app_version": "15.2.b2.20261113085558",
+    "15.2.beta3-aarch64": {
+      "app_version": "15.2.b3.20261120034803",
       "arch": "aarch64",
-      "generated": "2026-11-14T22:34:47Z",
+      "generated": "2026-11-21T14:51:05Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -648,231 +648,231 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-audit-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-blocklist",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-bzip2-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-certctl",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-clibs",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD-3-Clause"
             ],
             "name": "FreeBSD-dhclient",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-fetch",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-kerberos-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libarchive",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libbsdstat",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libcasper",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libexecinfo",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libldns",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libmagic",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libucl",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-locales",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-mtree",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-ncurses-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pam-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-rc",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-resolvconf",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-tcpd",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-ufs-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-utilities",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-xz-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "CDDL-1.0"
             ],
             "name": "FreeBSD-zfs-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "Zlib"
             ],
             "name": "FreeBSD-zlib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-zstd-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
@@ -946,10 +946,10 @@
         "total": 40
       }
     },
-    "15.2.beta2-latest-aarch64": {
-      "app_version": "15.2.b2.20261113085558",
+    "15.2.beta3-latest-aarch64": {
+      "app_version": "15.2.b3.20261120034803",
       "arch": "aarch64",
-      "generated": "2026-11-14T22:34:53Z",
+      "generated": "2026-11-21T14:51:09Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -958,231 +958,231 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-audit-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-blocklist",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-bzip2-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-certctl",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-clibs",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD-3-Clause"
             ],
             "name": "FreeBSD-dhclient",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-fetch",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-kerberos-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libarchive",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libbsdstat",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libcasper",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libexecinfo",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libldns",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libmagic",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libucl",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-locales",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-mtree",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-ncurses-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pam-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-rc",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-resolvconf",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-tcpd",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-ufs-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-utilities",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-xz-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "CDDL-1.0"
             ],
             "name": "FreeBSD-zfs-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "Zlib"
             ],
             "name": "FreeBSD-zlib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-zstd-lib",
-            "version": "15.2.b2.20261113085558"
+            "version": "15.2.b3.20261120034803"
           },
           {
             "licenses": [
