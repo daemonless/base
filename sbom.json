@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-21T14:25:34Z",
+  "generated": "2026-11-24T00:30:10Z",
   "image": "base",
   "tags": {
     "15.1-amd64": {
       "app_version": "15.1",
       "arch": "amd64",
-      "generated": "2026-11-21T13:53:10Z",
+      "generated": "2026-11-24T00:27:56Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -322,7 +322,7 @@
     "15.1-latest-amd64": {
       "app_version": "15.1",
       "arch": "amd64",
-      "generated": "2026-11-21T13:50:57Z",
+      "generated": "2026-11-24T00:28:06Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -394,7 +394,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libarchive",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -422,7 +422,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libldns",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -464,14 +464,14 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1p4"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -485,7 +485,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -506,7 +506,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p6"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -541,7 +541,7 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-zfs-lib",
-            "version": "15.1p1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -555,7 +555,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p5"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -597,7 +597,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.9.0"
+            "version": "2.9.2"
           },
           {
             "licenses": [
@@ -639,7 +639,7 @@
     "15.2.beta3-amd64": {
       "app_version": "15.2.b3.20261120034838",
       "arch": "amd64",
-      "generated": "2026-11-21T14:24:28Z",
+      "generated": "2026-11-24T00:29:45Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -949,7 +949,7 @@
     "15.2.beta3-latest-amd64": {
       "app_version": "15.2.b3.20261120034838",
       "arch": "amd64",
-      "generated": "2026-11-21T14:24:57Z",
+      "generated": "2026-11-24T00:28:09Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
